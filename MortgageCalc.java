@@ -1,5 +1,7 @@
 package com.mortgage.com;
 
+import java.text.DecimalFormat;
+
 public class MortgageCalc {
     private final Mortgage mortgage;
 
@@ -7,15 +9,17 @@ public class MortgageCalc {
         this.mortgage = mortgage;
     }
 
-    public double mortgageDue() {
-        double calcPrincipal, calcInterest, calcnumPaymentsDue, mortgageMonthly, topLine, bottomLine;
+    public String mortgageDue() {
+        DecimalFormat df = new DecimalFormat("0.00");
+        double calcPrincipal, calcInterest, calcnumPaymentsDue, mortgageMonthly, topLine, bottomLine, totalPay;
         calcPrincipal = actualLoan();
         calcInterest = interestRate();
         calcnumPaymentsDue = numPaymentsDue();
         topLine = Math.pow((mortgage.getFIGURE() + calcInterest), calcnumPaymentsDue);
         bottomLine = Math.pow((mortgage.getFIGURE() + calcInterest), calcnumPaymentsDue) - (mortgage.getFIGURE());
         mortgageMonthly = (calcPrincipal * calcInterest * topLine) / (bottomLine);
-        return mortgageMonthly;
+        totalPay = mortgageMonthly * calcnumPaymentsDue;
+        return "You will pay $" + df.format(mortgageMonthly) + "monthly. The total payment will be $" + df.format(totalPay);
     }
 
     public double actualLoan() {
@@ -32,4 +36,5 @@ public class MortgageCalc {
         mortgage.setYears(mortgage.getYears() * mortgage.getMONTHS());
         return mortgage.getYears();
     }
+
 }
