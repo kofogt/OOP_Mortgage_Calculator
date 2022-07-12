@@ -65,20 +65,6 @@ public class Mortgage {
 
     }
 
-    public double mortgageDue() {
-        return mortgageCalc.mortgageDue();
-    }
 
-    private double actualLoan() {
-        return mortgageCalc.actualLoan();
-    }
-
-    private double interestRate() {
-        return mortgageCalc.interestRate();
-    }
-
-    private double numPaymentsDue() {
-        return mortgageCalc.numPaymentsDue();
-    }
 
 }
